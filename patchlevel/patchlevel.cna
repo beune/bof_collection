@@ -1,9 +1,10 @@
 # author: Pim Beune
 
 beacon_command_register(
-    "patchlevel", "Get the patch level of a system by querying HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion. Requires an authenticated domain account.",
-    "INFO: Get the patch level of a system by querying HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\nRequires an authenticated domain account.\n\n" .
-    "EXAMPLES:\npatchlevel dc01.test.local");
+    "patchlevel", "Get the patch level of a system by querying HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion. Requires an authenticated domain account. Works with hostnames and IP addresses.",
+    "INFO: Get the patch level of a system by querying HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\nRequires an authenticated domain account. Works with hostnames and IP addresses.\n\n" .
+    "EXAMPLES:\npatchlevel dc01.test.local\n" .
+    "patchlevel 172.16.184.130");
 
 alias patchlevel {
     $bid = $1;
