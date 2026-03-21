@@ -1,5 +1,5 @@
 #include <windows.h>
-#include "beacon.h"
+#include "../beacon.h"
 
 VOID go(
     IN PCHAR Buffer,

@@ -1,0 +1,32 @@
+# author: Pim Beune
+
+beacon_command_register(
+    "hklm_exists", "Check if a certain key exists in HKLM on a remote system using the Remote Registry Protocol",
+    "INFO: Check if a certain key exists in HKLM on a remote system using the Remote Registry Protocol.\n\n" .
+    "EXAMPLES:\nhklm_exists dc01.test.local \"SOFTWARE\\VMware, Inc.\"\n" .
+    "hklm_exists 172.16.184.130 \"SOFTWARE\\VMware, Inc.\"");
+
+alias hklm_exists {
+    $bid = $1;
+    $hostname = $2;
+    $key = $3;
+
+    if ($hostname eq "") {
+        berror($bid, "Please specify a hostname or IP address.");
+        return;
+    }
+
+    if ($key eq "") {
+        berror($bid, "Please specify a registry key.");
+        return;
+    }
+
+    # Read in the right BOF file
+    $handle = openf(script_resource("dist/hklm_exists." . barch($bid) . ".o"));
+    $data = readb($handle, -1);
+    closef($handle);
+
+    # Pack our arguments
+    $args = bof_pack($bid, "zz", $hostname, $key);
+    beacon_inline_execute($bid, $data, "go", $args);
+}
