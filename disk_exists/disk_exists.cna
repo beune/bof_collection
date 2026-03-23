@@ -1,12 +1,12 @@
 # author: Pim Beune
 
 beacon_command_register(
-    "folder_exists", "Check if a certain folder exists on a remote system using the Remote Registry Protocol",
+    "disk_exists", "Check if a certain folder exists on a remote system using the Remote Registry Protocol",
     "INFO: Check if a certain folder exists on a remote system using the Remote Registry Protocol.\n\n" .
-    "EXAMPLES:\nfolder_exists dc01.test.local \"C:\\Program Files\\Windows Defender\"\n" .
-    "folder_exists 172.16.184.130 \"C:\\Program Files\\Windows Defender\"");
+    "EXAMPLES:\ndisk_exists dc01.test.local \"C:\\Program Files\\Windows Defender\"\n" .
+    "disk_exists 172.16.184.130 \"C:\\Program Files\\Windows Defender\"");
 
-alias folder_exists {
+alias disk_exists {
     $bid = $1;
     $hostname = $2;
     $folder = $3;
@@ -22,7 +22,7 @@ alias folder_exists {
     }
 
     # Read in the right BOF file
-    $handle = openf(script_resource("dist/folder_exists." . barch($bid) . ".o"));
+    $handle = openf(script_resource("dist/disk_exists." . barch($bid) . ".o"));
     $data = readb($handle, -1);
     closef($handle);
 

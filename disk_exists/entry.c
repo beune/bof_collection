@@ -46,11 +46,11 @@ VOID go(
         NULL
     );
 
-    if (result == ERROR_INVALID_NAME || result == ERROR_PATH_NOT_FOUND) {
+    if (result == ERROR_ACCESS_DENIED) {
         BeaconPrintf(CALLBACK_OUTPUT, "[+] %s does NOT exist on %s.", path, hostname);
     } else if (result == ERROR_ALREADY_EXISTS) {
         BeaconPrintf(CALLBACK_OUTPUT, "[+] %s exists on %s.", path, hostname);
-    } else if (result == ERROR_ACCESS_DENIED) {
+    } else if (result == ERROR_SUCCESS) {
         BeaconPrintf(CALLBACK_OUTPUT, "[+] %s did not exist and has been written to %s. Make sure to delete to leave no artifacts!", path, hostname);
     } else {
         BeaconPrintf(CALLBACK_ERROR, "Unknown error code: 0x%08x.", result);

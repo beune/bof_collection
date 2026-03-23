@@ -1,4 +1,4 @@
-BOFNAME := folder_exists
+BOFNAME := disk_exists
 COMINCLUDE := -I. -Icommon
 LIBINCLUDE := 
 
