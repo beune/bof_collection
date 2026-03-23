@@ -23,7 +23,7 @@ VOID go(
 
     // Connect to remote registry
     if (RegConnectRegistryA(hostname, HKEY_LOCAL_MACHINE, &hRemoteHKLM) != ERROR_SUCCESS) {
-        BeaconPrintf(CALLBACK_ERROR, "Failed to connect to remote registry. Are you an authenticated user and is the machine reachable?");
+        BeaconPrintf(CALLBACK_ERROR, "RegConnectRegistry failed: 0x%08x. Are you a domain-joined user and is RRP running?");
         return;
     }
 

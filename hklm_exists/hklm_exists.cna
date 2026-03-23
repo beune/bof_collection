@@ -28,5 +28,6 @@ alias hklm_exists {
 
     # Pack our arguments
     $args = bof_pack($bid, "zz", $hostname, $key);
+    btask($bid, "Connecting to remote registry, this can take a while...");
     beacon_inline_execute($bid, $data, "go", $args);
 }

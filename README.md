@@ -1,0 +1,32 @@
+# BOF Collection
+
+Collection of Beacon Object Files (BOFs) that I wrote.
+
+## `hklm_exists`
+
+Credit to [Outflank](https://www.youtube.com/watch?v=MxDq552Di3Y) for the research.
+
+![](./static/hklm_exists.png)
+
+This BOF uses the Remote Registry Protocol (RRP) to enumerate registry keys in HKLM of the target machine. It uses an information leak that discloses the presence of a key when an attempt is made to delete that key.
+
+### Important
+
+* Remote Registry Service must be running on the target. If the Startup type is not set to "Disabled", it will start automatically in my experience. [The `\\.\pipe\winreg` trick is not needed](https://x.com/splinter_code/status/1715876413474025704) in this case.
+* The BOF will do a sanity check if the key is not accessible by the current user. If it is, the BOF will exit early to prevent regkey deletion.
+* Requires user to be domain-joined.
+
+## `patchlevel`
+
+Credit to [Outflank](https://www.youtube.com/watch?v=MxDq552Di3Y) for the research.
+
+![](./static/patchlevel.png) 
+
+This BOF uses the Remote Registry Protocol (RRP) to read `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion`, which contains the exact patch level of a machine.
+
+### Important
+
+* Remote Registry Service must be running on the target. If the Startup type is not set to "Disabled", it will start automatically in my experience. [The `\\.\pipe\winreg` trick is not needed](https://x.com/splinter_code/status/1715876413474025704) in this case.
+* Requires user to be domain-joined.
+
+# Compilation instructions
