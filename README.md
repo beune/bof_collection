@@ -44,3 +44,5 @@ This BOF uses the Remote Registry Protocol (RRP) to read `HKLM\SOFTWARE\Microsof
 * Requires user to be domain-joined.
 
 # Compilation instructions
+
+Other than your usual MinGW compiler, this repo requires [boflink](https://github.com/MEhrn00/boflink) in `$PATH`. Other than that, just run `make`!
