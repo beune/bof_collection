@@ -4,29 +4,6 @@
 #include "common/struct.h"
 #include "common/AtomStorage.h"
 
-BOOL PatchAddr(unsigned char* buffer, int bufLen, void* newValue, char* needle, LPVOID* needleAddr)
-{
-    // Iterate over the buffer
-    for (int i = 0; i < bufLen; i++)
-    {
-        // Compare the next 8 bytes in the buffer against the needle
-        if (memcmp(buffer + i, needle, sizeof(PVOID)) == 0)
-        {
-            // If the newValue parameter was provided patch it in to replace needle
-            if (newValue)
-                memcpy(buffer + i, &newValue, sizeof(PVOID));
-
-            // If the needleAddr parameter was provided store the address of needle
-            if (needleAddr)
-                *needleAddr = (LPVOID)(buffer + i);
-            return TRUE;
-        }
-    }
-
-    return FALSE;
-}
-
-
 VOID go(
     IN PCHAR Buffer,
     IN ULONG Length

