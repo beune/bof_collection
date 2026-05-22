@@ -1,0 +1,26 @@
+# author: Pim Beune
+
+beacon_command_register(
+    "remotepipelist", "Enumerate named pipes on a remote system",
+    "INFO: Enumerate named pipes on a remote system.\n\n" .
+    "EXAMPLES:\nremotepipelist dc01.test.local \n" .
+    "remotepipelist 172.16.184.130 ");
+
+alias remotepipelist {
+    $bid = $1;
+    $hostname = $2;
+
+    if ($hostname eq "") {
+        berror($bid, "Please specify a hostname or IP address.");
+        return;
+    }
+
+    # Read in the right BOF file
+    $handle = openf(script_resource("dist/remotepipelist." . barch($bid) . ".o"));
+    $data = readb($handle, -1);
+    closef($handle);
+
+    # Pack our arguments
+    $args = bof_pack($bid, "z", $hostname);
+    beacon_inline_execute($bid, $data, "go", $args);
+}
