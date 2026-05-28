@@ -43,6 +43,18 @@ This BOF uses the Remote Registry Protocol (RRP) to read `HKLM\SOFTWARE\Microsof
 * Remote Registry Service must be running on the target. If the Startup type is not set to "Disabled", it will start automatically in my experience. [The `\\.\pipe\winreg` trick is not needed](https://x.com/splinter_code/status/1715876413474025704) in this case.
 * Requires user to be domain-joined.
 
+## `remotepipelist`
+
+Credit to [Outflank](https://outflank.nl/blog/2023/10/19/listing-remote-named-pipes/) for the research. This is an improved version over their PoC as it does not require .NET and does authentication over SSPI instead of manually entering credentials.
+
+![](./static/remotepipelist.png)
+
+This is a self-contained SMB2 client that connects to the remote machine over TCP/445, authenticates the current user using SSPI and enumerates the named pipes from the `IPC$` share.
+
+### IMPORTANT
+
+* Requires user to be domain-joined.
+
 # Compilation instructions
 
 Other than your usual MinGW compiler, this repo requires [boflink](https://github.com/MEhrn00/boflink) in `$PATH`. Other than that, just run `make`!
