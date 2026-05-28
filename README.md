@@ -2,6 +2,16 @@
 
 Collection of Beacon Object Files (BOFs) that I wrote.
 
+## Table of Contents
+
+* [`hklm_exists`](#hklm_exists)
+* [`disk_exists`](#disk_exists)
+* [`patchlevel`](#patchlevel)
+* [`remotepipelist`](#remotepipelist)
+* [Compilation instructions](#compilation-instructions)
+
+---
+
 ## `hklm_exists`
 
 Credit to [Outflank](https://www.youtube.com/watch?v=MxDq552Di3Y) for the research.
