@@ -18,7 +18,7 @@
 #include <sspi.h>
 #include <bcrypt.h>
 
-#include "beacon.h"
+#include "../beacon.h"
 #include "print.h"
 
 #ifdef BOF

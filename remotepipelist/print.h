@@ -1,5 +1,5 @@
 #pragma once
-#include "beacon.h"
+#include "../beacon.h"
 #include <windows.h>
 
 #ifndef bufsize
