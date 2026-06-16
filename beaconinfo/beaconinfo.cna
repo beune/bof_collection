@@ -1,0 +1,18 @@
+# author: Pim Beune
+
+beacon_command_register(
+    "beaconinfo", "Show starting and end address of beacon in memory.",
+    "INFO: Show starting and end address of beacon in memory.\n\n" .
+    "EXAMPLES:\nbeaconinfo\n");
+
+alias beaconinfo {
+    $bid = $1;
+
+    # Read in the right BOF file
+    $handle = openf(script_resource("dist/beaconinfo." . barch($bid) . ".o"));
+    $data = readb($handle, -1);
+    closef($handle);
+
+    # Pack our arguments
+    beacon_inline_execute($bid, $data, "go", $null);
+}
