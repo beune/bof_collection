@@ -8,6 +8,8 @@ Collection of Beacon Object Files (BOFs) that I wrote.
 * [`disk_exists`](#disk_exists)
 * [`patchlevel`](#patchlevel)
 * [`remotepipelist`](#remotepipelist)
+* [`beaconinfo`](#beaconinfo)
+* [`cat`](#cat)
 * [Compilation instructions](#compilation-instructions)
 
 ---
@@ -64,6 +66,18 @@ This is a self-contained SMB2 client that connects to the remote machine over TC
 ### IMPORTANT
 
 * Requires user to be domain-joined.
+
+## `beaconinfo`
+
+Shows starting and ending address of beacon in memory. Useful for developing/debugging.
+
+![](./static/beaconinfo.png)
+
+## `cat`
+
+Prints contents of a file. Does size checking in order not to overload the CS console, sanitizes output for weird characters and is UTF8 and UTF16 compatible. Also supports UNC paths.
+
+![](./static/cat.png)
 
 # Compilation instructions
 
