@@ -18,5 +18,5 @@ VOID go(IN PCHAR Buffer, IN ULONG Length)
         RtlSecureZeroMemory(&mbi, sizeof(MEMORY_BASIC_INFORMATION));
         VirtualQuery(BeaconAllocationEnd + 1, &mbi, sizeof(MEMORY_BASIC_INFORMATION));
     }
-    BeaconPrintf(CALLBACK_OUTPUT, "Beacon start address: 0x%llx\nBeacon end address:   0x%llx\nBeacon size:          0x%llx\nBeaconPrintf is at: 0x%llx", BeaconAllocationBase, BeaconAllocationEnd, BeaconAllocationEnd - BeaconAllocationBase, &BeaconPrintf);
+    BeaconPrintf(CALLBACK_OUTPUT, "Beacon start address: 0x%llx\nBeacon end address:   0x%llx\nBeacon size:          0x%llx\nBeaconPrintf is at:   0x%llx", BeaconAllocationBase, BeaconAllocationEnd, BeaconAllocationEnd - BeaconAllocationBase, &BeaconPrintf);
 }
