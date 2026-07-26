@@ -68,6 +68,9 @@ DECLSPEC_IMPORT void    BeaconFormatInt(formatp * format, int value);
 
 /* Output Functions */
 #define CALLBACK_OUTPUT      0x0
+#define CALLBACK_FILE        0x02
+#define CALLBACK_FILE_WRITE  0x08
+#define CALLBACK_FILE_CLOSE  0x09
 #define CALLBACK_OUTPUT_OEM  0x1e
 #define CALLBACK_OUTPUT_UTF8 0x20
 #define CALLBACK_ERROR       0x0d
