@@ -10,6 +10,7 @@ Collection of Beacon Object Files (BOFs) that I wrote.
 * [`remotepipelist`](#remotepipelist)
 * [`beaconinfo`](#beaconinfo)
 * [`cat`](#cat)
+* [`CVE-2019-16098`](#CVE-2019-16098)
 * [Compilation instructions](#compilation-instructions)
 
 ---
@@ -78,6 +79,12 @@ Shows starting and ending address of beacon in memory. Useful for developing/deb
 Prints contents of a file. Does size checking in order not to overload the CS console, sanitizes output for weird characters and is UTF8 and UTF16 compatible. Also supports UNC paths.
 
 ![](./static/cat.png)
+
+## `CVE-2019-16098`
+
+Abuses a kASLR leak together with R/W primitive in RTCore64.sys to steal a SYSTEM token. Implemented the remainder as per [Julian Peña's writeup](https://julian-pena.com/2025-09-29-exploiting-drivers-1/). Was a fun little introduction to kernel exploit dev :)
+
+![](./static/CVE-2019-16098.png)
 
 # Compilation instructions
 
