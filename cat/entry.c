@@ -17,6 +17,10 @@ static int sanitize_utf8(char *buf, int len)
     int in = 0, out = 0;
     while (in < len) {
         unsigned char b = (unsigned char)buf[in];
+        if (b == 0x00) {
+            in++;
+            continue;
+        }
         if (b < 0x80) {
             buf[out++] = is_safe_ascii(b) ? (char)b : '?';
             in++;
