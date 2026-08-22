@@ -51,28 +51,9 @@ VOID go(
     } else if (result == ERROR_ALREADY_EXISTS) {
         BeaconPrintf(CALLBACK_OUTPUT, "[+] %s exists on %s.", path, hostname);
     } else if (result == ERROR_SUCCESS) {
-        BeaconPrintf(CALLBACK_OUTPUT, "[+] %s did not exist and has been written to %s.", path, hostname);
+        BeaconPrintf(CALLBACK_OUTPUT, "[+] %s did not exist and has been written to %s. Make sure to delete to leave no artifacts!", path, hostname);
     } else {
         BeaconPrintf(CALLBACK_ERROR, "Unknown error code: 0x%08x.", result);
-    }
-
-    // RegSaveKey drops a hive file at `path` even when it ultimately returns
-    // ERROR_ACCESS_DENIED, so clean up in every "path did not pre-exist" branch.
-    if (result == ERROR_SUCCESS || result == ERROR_ACCESS_DENIED) {
-        char uncPath[512];
-        if (strlen(path) >= 2 && path[1] == ':') {
-            snprintf(uncPath, sizeof(uncPath), "\\\\%s\\%c$%s", hostname, path[0], path + 2);
-            if (DeleteFileA(uncPath)) {
-                BeaconPrintf(CALLBACK_OUTPUT, "[+] Cleaned up artifact at %s.", uncPath);
-            } else {
-                DWORD gle = GetLastError();
-                if (gle != ERROR_FILE_NOT_FOUND) {
-                    BeaconPrintf(CALLBACK_ERROR, "Failed to delete artifact at %s. Manual cleanup required. GLE: %d", uncPath, gle);
-                }
-            }
-        } else {
-            BeaconPrintf(CALLBACK_ERROR, "Cannot build UNC path from '%s' for cleanup. Manual cleanup required.", path);
-        }
     }
 
     // Cleanup
